@@ -26,4 +26,5 @@ func Execute() {
 
 func init() {
 	RootCmd.AddCommand(pwdCmd)
+	RootCmd.AddCommand(testCmd)
 }

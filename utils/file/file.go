@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"runtime"
+	"path/filepath"
 	"strings"
 )
 
@@ -84,18 +84,14 @@ func IsFile(f string) bool {
 }
 
 // get path of this file
-func getCurrentPath() string {
-	_, file, _, ok := runtime.Caller(1)
-	if !ok {
-		fmt.Println("Can not get current file info")
-		// 错误，默认当前目录
+func GetCurrentPath() string {
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		fmt.Printf("get file path err:%s \n", err.Error())
 		return "./"
 	}
-	lastIndex := strings.LastIndex(file, "/")
-	if lastIndex < 0 {
-		return "./"
+	if !strings.HasSuffix(dir, "/") {
+		dir = dir + "/"
 	}
-
-	path := file[:lastIndex+1]
-	return path
+	return dir
 }

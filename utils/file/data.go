@@ -9,7 +9,7 @@ import (
 
 // 从文件按行读取，保存到[]string返回
 func GetDataFromFile(fileName string) ([]string, error) {
-	fileName = getCurrentPath() + fileName
+	fileName = GetCurrentPath() + fileName
 	resStr := []string{}
 	if !IsFileExist(fileName) {
 		err := fmt.Errorf("not found file %s because it not exist", fileName)
@@ -50,7 +50,7 @@ func SaveString(fileName string, data string) error {
 
 // 将data保存到文件
 func saveDataToFile(fileName string, data string) error {
-	fileName = getCurrentPath() + fileName
+	fileName = GetCurrentPath() + fileName
 	addEnter := true
 	//fmt.Printf("[test] fielName:%s\n", fileName)
 	if !IsFileExist(fileName) {
