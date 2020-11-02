@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -84,5 +85,10 @@ func IsFile(f string) bool {
 
 // get path of this file
 func GetCurrentPath() string {
-	return "./"
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		fmt.Printf("get file path err:%s \n", err.Error())
+		return "./"
+	}
+	return dir
 }
